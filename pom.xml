@@ -9,11 +9,11 @@
 		
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.jcgontijo</groupId>
+	<groupId>com.kylanches</groupId>
 	<artifactId>paineldecontrole</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>paineldecontrole</name>
-	<description>Projeto de reformulção do painel de controle da JCGontijo</description>
+	<description>Projeto de reformulção do painel de controle da KyLanches</description>
 	<properties>
 		<java.version>11</java.version>
 		<swagger.version>3.0.0</swagger.version>
