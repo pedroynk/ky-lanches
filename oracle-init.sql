@@ -1,0 +1,2 @@
+CREATE USER app_user IDENTIFIED BY app_password;
+GRANT CONNECT, RESOURCE TO app_user;

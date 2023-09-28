@@ -1,0 +1,117 @@
+<aside th:fragment="aside" class="main-sidebar sidebar-dark-primary elevation-4">
+  <a th:href="@{/}" class="brand-link">
+    <img th:src="@{/img/JC_gontijo_logo.jpeg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
+    <span class="brand-text font-weight-strong">Painel de Controle</span>
+  </a>
+
+  <div class="sidebar">
+
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="info d-flex align-items-center">
+        <img class="img-circle mr-2" th:src="@{'/files/' + ${#authentication.principal.id}}" alt="Foto de perfil" />
+        <a th:href="@{/perfil}" class="d-block">
+          <span th:if="${#strings.arraySplit(#authentication.principal.nome, ' ').length <= 2}"
+            th:text="${#authentication.principal.nome}"></span>
+          <span th:if="${#strings.arraySplit(#authentication.principal.nome, ' ').length > 2}"
+            th:text="${#strings.arraySplit(#authentication.principal.nome, ' ')[0] + ' ' + #strings.arraySplit(#authentication.principal.nome, ' ')[1]}"></span>
+        </a>
+        </a>
+      </div>
+    </div>
+
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+        <li class="nav-item">
+          <a th:href="@{/home}" class="nav-link">
+            <i class="nav-icon fas fa-tachometer-alt"></i>
+            <p>Dashboard</p>
+          </a>
+        </li>
+    
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-user-tie"></i>
+            <p>
+              Usuários
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a th:href="@{/usuarios/listar}" class="nav-link">
+                <i class="fas fa-clipboard-list nav-icon"></i>
+                <p>Registros</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-check-circle"></i>
+            <p>
+              Qualidade
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a th:href="@{/fornecedores/listar}" class="nav-link">
+                <i class="fas fa-box-open nav-icon"></i>
+                <p>Fornecedores</p>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a th:href="@{/tipo-servicos/listar}" class="nav-link">
+                <i class="fas fa-hammer nav-icon"></i>
+                <p>Serviços</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-balance-scale"></i>
+            <p>
+              Jurídico
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a th:href="@{/contratos/listar}" class="nav-link">
+                <i class="nav-icon fas fa-file-contract nav-icon"></i>
+                <p>Contratos</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-store"></i>
+            <p>
+              Comercial
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a th:href="@{/projetos/cadastrar}" class="nav-link">
+                <i class="nav-icon fas fa-edit nav-icon"></i>
+                <p>Cadastrar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a th:href="@{/projetos/}" class="nav-link">
+                <i class="fas fa-table nav-icon"></i>
+                <p>Listar</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</aside>
