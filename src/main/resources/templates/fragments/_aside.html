@@ -1,6 +1,6 @@
 <aside th:fragment="aside" class="main-sidebar sidebar-dark-primary elevation-4">
   <a th:href="@{/}" class="brand-link">
-    <img th:src="@{/img/JC_gontijo_logo.jpeg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
+    <img th:src="@{/img/kylanches.jpeg}" alt="AdminLTE Logo" class="brand-image img-square elevation-3">
     <span class="brand-text font-weight-strong">Painel de Controle</span>
   </a>
 
@@ -48,65 +48,17 @@
         </li>
         <li class="nav-item">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-check-circle"></i>
+            <i class="nav-icon fas fa-cash-register"></i>
             <p>
-              Qualidade
+              Cadastro de Vendas
               <i class="fas fa-angle-left right"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a th:href="@{/fornecedores/listar}" class="nav-link">
-                <i class="fas fa-box-open nav-icon"></i>
-                <p>Fornecedores</p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a th:href="@{/tipo-servicos/listar}" class="nav-link">
-                <i class="fas fa-hammer nav-icon"></i>
-                <p>Serviços</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-balance-scale"></i>
-            <p>
-              Jurídico
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a th:href="@{/contratos/listar}" class="nav-link">
-                <i class="nav-icon fas fa-file-contract nav-icon"></i>
-                <p>Contratos</p>
-              </a>
-            </li>
-          </ul>
-        </li>
-
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-store"></i>
-            <p>
-              Comercial
-              <i class="fas fa-angle-left right"></i>
-            </p>
-          </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a th:href="@{/projetos/cadastrar}" class="nav-link">
-                <i class="nav-icon fas fa-edit nav-icon"></i>
-                <p>Cadastrar</p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a th:href="@{/projetos/}" class="nav-link">
-                <i class="fas fa-table nav-icon"></i>
-                <p>Listar</p>
+              <a th:href="@{/vendas/listar}" class="nav-link">
+                <i class="fas fa-dollar-sign nav-icon"></i>
+                <p>Vendas</p>
               </a>
             </li>
           </ul>
