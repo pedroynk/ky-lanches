@@ -63,8 +63,11 @@
                     </select>
                   </div>
 
-                  <div 
-                   id="valorTotal">0.00</div>
+                  <div id="lanche">
+                  </div>
+                  <span>Valor Total: R$ <span id="valorTotal">0.00</span></span>
+                  
+                  
                   </div>
 
                   
@@ -123,35 +126,12 @@
 
           if (!isNaN(quantidade) && quantidade > 0) {
             for (var i = 0; i < quantidade; i++) {
-              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanches[' + i + ']"><option value="">Selecione o lanche</option><option value="Lanche 1">Café</option><option value="Lanche 2">Cachorro-Quente</option><option value="Lanche 3">Pão com Carne</option><option value="Lanche 4">Pão com Frango</option></select></div>');
+              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanches[' + i + ']"><option value="">Selecione o lanche</option><option value="Lanche 1" data-price="1.50" >Café</option><option value="Lanche 2" data-price="1.50">Cachorro-Quente</option><option value="Lanche 3" data-price="1.50">Pão com Carne</option><option value="Lanche 4" data-price="1.50">Pão com Frango</option></select></div>');
             }
           }
         });
       });
     </script>
-
-<script>
-  $(document).ready(function () {
-    $("#quantidade").on("input", atualizarValorTotal);
-    
-    $("#lanche").on("change", "select", atualizarValorTotal);
-    
-    function atualizarValorTotal() {
-      var quantidade = parseInt($("#quantidade").val()) || 0;
-      var total = 0;
-      
-      $("#lanche select").each(function () {
-        var preco = parseFloat($(this).find("option:selected").data("preco")) || 0;
-        total += preco;
-      });
-      
-      var valorTotal = total * quantidade;
-      $("#valorTotal").text(valorTotal.toFixed(2));
-    }
-  });
-</script>
-
-
 
     <script>
       $(function () {
