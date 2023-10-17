@@ -1,8 +1,11 @@
 package com.kylanches.paineldecontrole.model;
 
 import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,21 +30,23 @@ public class Vendas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero", nullable = false)
+    @Column(name = "numero", nullable = true)
     private Integer numero;
 
-    @Column(name = "data_venda", nullable = false)
+    @Column(name = "data_venda", nullable = true)
     private LocalDate dataVenda;
 
-    @Column(name = "lanche", nullable = false)
-    private String lanche;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "forma_pagamento", nullable = true)
+    private FormaPagamentoEnum formaPagamento;
 
-    @Column(name = "forma_pagamento", nullable = false)
-    private Integer formaPagamento;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "lanche", nullable = true)
+    private LancheEnum lanche;
 
-    @Column(name = "quantidade", nullable = false)
+    @Column(name = "quantidade", nullable = true)
     private Integer quantidade;
 
-    @Column(name = "valor_total", nullable = false)
+    @Column(name = "valor_total", nullable = true)
     private Double valorTotal;
 }

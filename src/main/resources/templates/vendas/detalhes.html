@@ -39,8 +39,8 @@
                                 <p class="text-muted" th:text="${vendas.quantidade}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-briefcase mr-1"></i> Valor</strong>
-                                <p class="text-muted" th:text="${vendas.valor}"></p>
+                                <strong><i class="fas fa-briefcase mr-1"></i> Valor Total</strong>
+                                <p class="text-muted" th:text="${vendas.valorTotal}"></p>
                                 <hr>
 
                             </div>
@@ -59,10 +59,7 @@
                                     </thead>
                                     <tbody>
                                             <td>
-                                                <a th:href="@{'/vendass/download/' + ${documento.id}}"
-                                                    class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
+
                                                 <a th:href="@{'/vendas/excluir-venda/' + ${vendas.id}} + '/' + ${vendas.id}"
                                                     class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Você tem certeza?')">

@@ -12,7 +12,7 @@
 
 
 <head>
-  <title>[[${vendas.id == null ? 'Novo' : 'Editar'}]] Vendas</title>
+  <title>[[${vendas.id == null ? 'Dados da' : 'Editar'}]] Venda</title>
 </head>
 
 <body>
@@ -26,7 +26,6 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="card-body">
               <fieldset>
-                <legend>Dados da Venda</legend>
 
                 <input type="hidden" th:field="*{id}">
 
@@ -34,7 +33,7 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="numero">Número</label>
+                      <label for="numero">Número da Venda</label>
                       <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda">
                     </div>
 
@@ -63,21 +62,18 @@
                     </select>
                   </div>
 
-                  <div id="lanche">
-                  </div>
-                  <span>Valor Total: R$ <span id="valorTotal">0.00</span></span>
-                  
-                  
+                  <div
+                    id="lanche">
                   </div>
 
-                  
+                  </div>
                 </div>
             </div>
           </div>
       </div>
-    </div>
+
     <div class="card">
-      <button type="submit" form="mainForm" class="btn btn-primary">Salvar</button>
+      <button type="submit" form="mainForm" class="btn btn-primary">Cadastar</button>
     </div>
   </main>
 
@@ -126,7 +122,7 @@
 
           if (!isNaN(quantidade) && quantidade > 0) {
             for (var i = 0; i < quantidade; i++) {
-              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanches[' + i + ']"><option value="">Selecione o lanche</option><option value="Lanche 1" data-price="1.50" >Café</option><option value="Lanche 2" data-price="1.50">Cachorro-Quente</option><option value="Lanche 3" data-price="1.50">Pão com Carne</option><option value="Lanche 4" data-price="1.50">Pão com Frango</option></select></div>');
+              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Lanche 1" data-price="1.50" >Café</option><option value="Lanche 2" data-price="1.50">Cachorro-Quente</option><option value="Lanche 3" data-price="1.50">Pão com Carne</option><option value="Lanche 4" data-price="1.50">Pão com Frango</option></select></div>');
             }
           }
         });

@@ -61,7 +61,7 @@ public class UsuarioService {
     }
 
     public List<String> listarTiposDeUsuarios() {
-        return Arrays.asList("Administrador", "Juridico", "Qualidade", "Comercial");
+        return Arrays.asList("Administrador", "Funcionário", "Gerente");
     }
 
     public String salvarFotoDePerfil(MultipartFile file) throws IOException {

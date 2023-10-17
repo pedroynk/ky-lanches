@@ -2,6 +2,6 @@ package com.kylanches.paineldecontrole.model;
 
 public enum Perfil {
 
-    ADMINISTRADOR,JURIDICO,COMERCIAL,QUALIDADE,CONSULTA;
+    ADMINISTRADOR,VENDEDOR,GERENTE, CONSULTA;
     
 }

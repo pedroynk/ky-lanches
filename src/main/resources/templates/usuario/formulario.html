@@ -27,7 +27,7 @@
                   <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                       <label for="nome">Nome</label>
-                      <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Mariane Josefa Gonçalves">
+                      <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{nome}" placeholder="Edson Arantes do Nascimento">
                       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('nome')}"  th:errors="*{nome}" id="error-message-nome"></div>
                       <script>
                         document.addEventListener('DOMContentLoaded', function () {
@@ -49,7 +49,7 @@
                   <div class="col-md-6 col-sm-12">
                     <div class="form-group">
                       <label for="email">E-mail</label>
-                      <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{email}" placeholder="mariane@exemplo.com" >
+                      <input type="text" class="form-control" th:errorclass="is-invalid" th:field="*{email}" placeholder="edsonvulgopelé@exemplo.com" >
                       <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" id="error-message-email"></div>
                       <script>
                         document.addEventListener('DOMContentLoaded', function () {
