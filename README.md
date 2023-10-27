@@ -1,6 +1,6 @@
-# PAINEL DE CONTROLE - JCGontijo
+# PAINEL DE CONTROLE - KY LANCHES
 <div align="center">
-  <img align="center" alt="Judeu-Java" height="90" src="src/main/resources/static/img/kylanches.jpeg">
+  <img align="center" alt="Pedro-Java" height="90" src="src/main/resources/static/img/kylanches.jpeg">
 </div>
 
 O Painel de Controle é um software ERP que tem como intuito o auxílio na gestão de vendas e financeira do empreendimento KY LANCHES.
@@ -9,9 +9,7 @@ O Painel de Controle é um software ERP que tem como intuito o auxílio na gest�
 - Aplicação com perfis múltiplos: Usuários Padrão e Administrador;
 - Desenvolvido pelos Alunos da UNICEPLAC
 
-:rocket: Project with MVC and Java applications. 
-
-> :rocket: **Projeto com MVC e aplicações em Java.**
+:rocket: Projeto com MVC e aplicações em Java.
 
 ## Feito com
 <div style="display: inline_block" align="center"><br>
