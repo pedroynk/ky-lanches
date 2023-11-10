@@ -19,7 +19,6 @@
                                     <th>Número da Venda</th>
                                     <th>Data da Venda</th>
                                     <th>Forma de Pagamento</th>
-                                    <th>Lanche</th>
                                     <th>Quantidade</th>
                                     <th>Valor Total</th>
                                 </tr>
@@ -28,8 +27,7 @@
                                 <tr th:each="vendas : ${vendas}">
                                     <td th:text="${vendas.numero}"></td>
                                     <td th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></td>
-                                    <td th:text="${vendas.formaPagamento}"></td>
-                                    <td th:text="${vendas.lanche}"></td>
+                                    <td th:text="${vendas.formaPagamento.descricao}"></td>
                                     <td th:text="${vendas.quantidade}"></td>
                                     <td th:text="${vendas.valorTotal}"></td>
                                     <td>

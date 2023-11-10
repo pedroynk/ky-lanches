@@ -28,11 +28,11 @@
                                 <hr>
 
                                 <strong><i class="fas fa-calendar-alt mr-1"></i> Lanche</strong>
-                                <p class="text-muted" th:text="${vendas.lanche}"></p>
+                                <p class="text-muted" th:text="${#strings.replace(vendas.lanche.toString(), '[', '').replace(']', '')}"></p>
                                 <hr>
 
                                 <strong><i class="fas fa-clock mr-1"></i> Forma de Pagamento</strong>
-                                <p class="text-muted" th:text="${vendas.formaPagamento}"></p>
+                                <p class="text-muted" th:text="${vendas.formaPagamento.descricao}"></p>
                                 <hr>
 
                                 <strong><i class="fas fa-dollar-sign mr-1"></i> Quantidade</strong>
@@ -46,32 +46,7 @@
                             </div>
                         </div>
 
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Venda</th>
-                                            <th>Data da Venda</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <td>
-
-                                                <a th:href="@{'/vendas/excluir-venda/' + ${vendas.id}} + '/' + ${vendas.id}"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Você tem certeza?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>

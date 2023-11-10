@@ -80,8 +80,10 @@ public class UsuarioController {
         }
 
         if (usuario.getId() == null) {
+            usuario.setAtivo(true);
             usuarioService.cadastrar(usuario);
         } else {
+            usuario.setAtivo(true);
             usuarioService.cadastrar(usuario);
 
         }
