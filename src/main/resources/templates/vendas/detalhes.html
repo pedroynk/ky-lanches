@@ -23,24 +23,24 @@
                                 <p class="text-muted" th:text="${vendas.numero}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-project-diagram mr-1"></i> Data da Venda</strong>
-                                <p class="text-muted" th:text="${vendas.dataVenda}"></p>
+                                <strong><i class="fas fa-calendar-alt mr-1"></i> Data da Venda</strong>
+                                <p class="text-muted" th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-calendar-alt mr-1"></i> Lanche</strong>
+                                <strong><i class="fas fa-utensils mr-1"></i> Lanche</strong>
                                 <p class="text-muted" th:text="${#strings.replace(vendas.lanche.toString(), '[', '').replace(']', '')}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-clock mr-1"></i> Forma de Pagamento</strong>
+                                <strong><i class="fas fa-money-check-alt mr-1"></i> Forma de Pagamento</strong>
                                 <p class="text-muted" th:text="${vendas.formaPagamento.descricao}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-dollar-sign mr-1"></i> Quantidade</strong>
+                                <strong><i class="fas fa-shopping-cart mr-1"></i> Quantidade</strong>
                                 <p class="text-muted" th:text="${vendas.quantidade}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-briefcase mr-1"></i> Valor Total</strong>
-                                <p class="text-muted" th:text="${vendas.valorTotal}"></p>
+                                <strong><i class="fas fa-dollar-sign mr-1"></i> Valor Total</strong>
+                                <p class="text-muted" th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></p>
                                 <hr>
 
                             </div>

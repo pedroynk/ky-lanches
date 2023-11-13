@@ -29,7 +29,7 @@
                                     <td th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></td>
                                     <td th:text="${vendas.formaPagamento.descricao}"></td>
                                     <td th:text="${vendas.quantidade}"></td>
-                                    <td th:text="${vendas.valorTotal}"></td>
+                                    <td th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></td>
                                     <td>
                                         <div class="btn-group">
                                             <a type="button" class="btn btn-primary"
