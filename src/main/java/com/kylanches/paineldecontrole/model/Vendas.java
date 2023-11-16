@@ -34,14 +34,14 @@ public class Vendas {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "numero", nullable = true)
+    @Column(name = "numero", nullable = false)
     private Integer numero;
 
-    @Column(name = "data_venda", nullable = true)
+    @Column(name = "data_venda", nullable = false)
     private LocalDate dataVenda;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "forma_pagamento", nullable = true)
+    @Column(name = "forma_pagamento", nullable = false)
     private FormaPagamentoEnum formaPagamento;
 
     @ElementCollection
@@ -49,7 +49,7 @@ public class Vendas {
     @Column(name = "lanche")
     private List<String> lanche;
 
-    @Column(name = "quantidade", nullable = true)
+    @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 
     @Column(name = "valor_total", nullable = true)

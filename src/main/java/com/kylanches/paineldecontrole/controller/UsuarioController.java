@@ -65,7 +65,7 @@ public class UsuarioController {
     public String cadastrar(@Valid Usuario usuario, BindingResult bindingResult, ModelMap model,
             RedirectAttributes attrs, @RequestParam("fotoPerfil") MultipartFile fotoPerfil) throws IOException {
 
-        UsuarioValidator usuarioValidator = new UsuarioValidator();
+        UsuarioValidator usuarioValidator = new UsuarioValidator(usuarioService);
         usuarioValidator.validate(usuario, bindingResult);
         if (bindingResult.hasErrors()) {
            

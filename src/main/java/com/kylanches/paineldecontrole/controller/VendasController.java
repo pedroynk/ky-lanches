@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kylanches.paineldecontrole.model.FormaPagamentoEnum;
+import com.kylanches.paineldecontrole.model.LancheEnum;
 import com.kylanches.paineldecontrole.model.Vendas;
 import com.kylanches.paineldecontrole.services.VendasService;
 
@@ -79,13 +80,16 @@ public class VendasController {
         return new ModelAndView("redirect:/vendas/listar");
     }
 
-    @GetMapping("/{id}/editar")
-    public ModelAndView editar(@PathVariable Long id) {
-        ModelAndView modelAndView = new ModelAndView("vendas/formulario");
-        modelAndView.addObject("vendas", this.vendasService.buscarPorId(id));
+@GetMapping("/{id}/editar")
+public ModelAndView editar(@PathVariable Long id) {
+    ModelAndView modelAndView = new ModelAndView("vendas/formulario");
+    modelAndView.addObject("vendas", this.vendasService.buscarPorId(id));
+    modelAndView.addObject("formasPagamento", FormaPagamentoEnum.values());
+    modelAndView.addObject("lanches", LancheEnum.values());
 
-        return modelAndView;
-    }
+    return modelAndView;
+}
+
 
     @GetMapping("/listar")
     public ModelAndView listar(Pageable pageable) {

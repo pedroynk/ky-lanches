@@ -34,19 +34,47 @@
                   <div class="col-sm-6">
                     <div class="form-group">
                       <label for="numero">Número da Venda</label>
-                      <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda">
+                      <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda"
+                        id="numero">
+                      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('numero')}"
+                        th:errors="*{numero}" id="error-message-numero"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-numero');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
                     </div>
 
                     <div class="form-group">
                       <label for="dataVenda">Data da Venda</label>
                       <input type="date" class="form-control" th:field="*{dataVenda}" placeholder="Data da Venda">
+                      <ul>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:if="${#strings.contains(erro, 'DateTimeParseException')}">Formato inválido para data</li>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:unless="${#strings.contains(erro, 'DateTimeParseException')}" th:text="${erro}"></li>
+                      </ul>
                     </div>
 
                     <div class="form-group">
                       <label for="quantidade">Quantidade de Pedidos</label>
                       <input type="number" class="form-control" id="quantidade" th:field="*{quantidade}" placeholder="Quantidade de Pedidos">
                     </div>
+
                     <div id="lanche">
+                      <th:block th:each="lanche, iterStat : ${vendas.lanche}">
+                        <div class="form-group" id="lanche-div-${iterStat.index}">
+                          <label th:for="${'lanche' + iterStat.index}">Lanche</label>
+                          <select th:field="*{lanche}" class="form-control">
+                            <option th:each="lanche : ${lanche}" th:value="${lanche}" th:text="${lanche}" th:selected="${lanche}"></option>
+                          </select>
+                        </div>
+                      </th:block>
                     </div>
                   </div>
 
@@ -56,13 +84,29 @@
                       <option th:each="formaPagamento : ${formasPagamento}" th:value="${formaPagamento}"
                         th:text="${formaPagamento.descricao}"></option>
                     </select>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('formaPagamento')}"
+                        th:errors="*{formaPagamento}" id="error-message-formaPagamento"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-formaPagamento');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
                   </div>
-
                   </div>
                 </div>
             </div>
           </div>
       </div>
+
+      <div>
+        <label for="valorTotal1">Valor Total</label>
+        <input type="text" class="form-control" id="valorTotal1" name="valorTotal1" readonly>
+    </div>
 
     <div class="card">
       <button type="submit" form="mainForm" class="btn btn-primary">Cadastar</button>
@@ -85,8 +129,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.22.1/date_fns.min.js"></script>
 
 
-    <style>
-      .ui-autocomplete {
+
+  <style>
+.ui-autocomplete {
         background-color: white;
         border: 1px solid #ccc;
         padding: 10px;
@@ -102,24 +147,50 @@
       .ui-menu-item:hover {
         background-color: #f0f0f0;
       }
-    </style>
+  </style>
 
-    <script>
-      $(document).ready(function () {
-        $("#quantidade").on("input", function () {
-          var quantidade = parseInt($(this).val());
-          var lanche = $("#lanche");
+<style>
+  #valorTotal1 {
+      font-size: 20px;
+      color: rgb(0, 0, 0);
+      border: 2px solid rgb(255, 255, 255);
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 5px;
+  }
+</style>
 
-          lanche.empty();
+<script>
+ function formatarComoMoeda(valor) {
+    return 'R$ ' + valor.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.');
+}
+function atualizarValorTotal() {
+    var valorTotal1 = 0.0;
+    $("#lanche select").each(function() {
+        var preco = $(this).find('option:selected').data('price');
+        if(preco) {
+            valorTotal1 += parseFloat(preco);
+        }
+    });
+    $('#valorTotal1').val(formatarComoMoeda(valorTotal1));
+}
+$("#lanche").on("change", "select", atualizarValorTotal);
 
-          if (!isNaN(quantidade) && quantidade > 0) {
-            for (var i = 0; i < quantidade; i++) {
-              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50" >Café</option><option value="Cachorro-Quente" data-price="1.50">Cachorro-Quente</option><option value="Pão com Carne" data-price="1.50">Pão com Carne</option><option value="Pão com Frango" data-price="1.50">Pão com Frango</option></select></div>');
-            }
-          }
-        });
-      });
-    </script>
+</script>
+
+<script>
+  $(document).ready(function () {
+    $("#quantidade").on("input", function () {
+      var quantidadeDesejada = parseInt($(this).val());
+      var lanche = $("#lanche");
+      var quantidadeExistente = lanche.find('select').length;
+
+      for (var i = quantidadeExistente; i < quantidadeDesejada; i++) {
+        lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50">Café</option><option value="Cachorro-Quente" data-price="3.00">Cachorro-Quente</option><option value="Pão com Carne" data-price="3.00">Pão com Carne</option><option value="Pão com Frango" data-price="3.00">Pão com Frango</option></select></div>');
+      }
+    });
+  });
+</script>
 
     <script>
       $(function () {
