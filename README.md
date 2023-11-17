@@ -26,5 +26,10 @@ O Painel de Controle é um software ERP que tem como intuito o auxílio na gest�
   - Thymeleaf;
   - BOOTSTRAP;
 
+## Diagrama de Containers
+![image](https://github.com/pedroynk/ky-lanches/assets/139293417/c27c38dc-b412-4cd1-af12-4199dd93d512)
+
+
+
 ## Histórico de commits
 - Veja [Histórico de Commits](https://github.com/pedroynk/ky-lanches/commits/main) dos Colaboradores
