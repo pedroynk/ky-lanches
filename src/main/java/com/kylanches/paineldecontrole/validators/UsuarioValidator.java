@@ -7,10 +7,14 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 import com.kylanches.paineldecontrole.model.Usuario;
+import com.kylanches.paineldecontrole.services.UsuarioService;
 
 public class UsuarioValidator implements Validator {
 
     private static final String PASSWORD_PATTERN = "^(?=.*[a-zA-Z])(?=.*\\d)[a-zA-Z\\d@#$%^&+=]{5,}$";
+
+    public UsuarioValidator(UsuarioService usuarioService) {
+    }
 
     @Override
     public boolean supports(Class<?> clazz) {

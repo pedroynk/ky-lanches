@@ -12,7 +12,7 @@
 
 
 <head>
-  <title>[[${vendas.id == null ? 'Novo' : 'Editar'}]] Vendas</title>
+  <title>[[${vendas.id == null ? 'Dados da' : 'Editar'}]] Venda</title>
 </head>
 
 <body>
@@ -26,7 +26,6 @@
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
             <div class="card-body">
               <fieldset>
-                <legend>Dados da Venda</legend>
 
                 <input type="hidden" th:field="*{id}">
 
@@ -34,19 +33,39 @@
 
                   <div class="col-sm-6">
                     <div class="form-group">
-                      <label for="numero">Número</label>
-                      <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda">
+                      <label for="numero">Número da Venda</label>
+                      <input type="number" class="form-control" th:field="*{numero}" placeholder="Número da Venda"
+                        id="numero">
+                      <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('numero')}"
+                        th:errors="*{numero}" id="error-message-numero"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-numero');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
                     </div>
 
                     <div class="form-group">
                       <label for="dataVenda">Data da Venda</label>
                       <input type="date" class="form-control" th:field="*{dataVenda}" placeholder="Data da Venda">
+                      <ul>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:if="${#strings.contains(erro, 'DateTimeParseException')}">Formato inválido para data</li>
+                        <li class="text-danger" th:each="erro : ${#fields.errors('dataVenda')}"
+                        th:unless="${#strings.contains(erro, 'DateTimeParseException')}" th:text="${erro}"></li>
+                      </ul>
                     </div>
 
                     <div class="form-group">
                       <label for="quantidade">Quantidade de Pedidos</label>
-                      <input type="number" class="form-control" id="quantidade" placeholder="Quantidade de Pedidos">
+                      <input type="number" class="form-control" id="quantidade" th:field="*{quantidade}" placeholder="Quantidade de Pedidos">
                     </div>
+
                     <div id="lanche">
                     </div>
                   </div>
@@ -54,27 +73,35 @@
                   <div class="form-group">
                     <label for="formaPagamento">Forma de Pagamento</label>
                     <select th:field="*{formaPagamento}" class="form-control">
-                      <option value="">Selecione a Forma de Pagamento</option>
-                      <option value="">Cartão de Crédito</option>
-                      <option value="">Dinheiro</option>
-                      <option value="">Pix</option>
-                      <option th:each="formaPagamento : ${formaPagamento}" th:value="${formaPagamento}"
-                        th:text="${formaPagamento}"></option>
+                      <option th:each="formaPagamento : ${formasPagamento}" th:value="${formaPagamento}"
+                        th:text="${formaPagamento.descricao}"></option>
                     </select>
+                    <div class="alert alert-danger" role="alert" th:if="${#fields.hasErrors('formaPagamento')}"
+                        th:errors="*{formaPagamento}" id="error-message-formaPagamento"></div>
+                            <script>
+                              document.addEventListener('DOMContentLoaded', function () {
+                                var errorMessage = document.getElementById('error-message-formaPagamento');
+                                if (errorMessage) {
+                                setTimeout(function () {
+                                errorMessage.style.display = 'none';
+                                }, 10000);
+                                }
+                                  });
+                            </script>
                   </div>
-
-                  <div 
-                   id="valorTotal">0.00</div>
                   </div>
-
-                  
                 </div>
             </div>
           </div>
       </div>
+
+      <div>
+        <label for="valorTotal1">Valor Total</label>
+        <input type="text" class="form-control" id="valorTotal1" name="valorTotal1" readonly>
     </div>
+
     <div class="card">
-      <button type="submit" form="mainForm" class="btn btn-primary">Salvar</button>
+      <button type="submit" form="mainForm" class="btn btn-primary">Cadastar</button>
     </div>
   </main>
 
@@ -94,8 +121,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/date-fns/2.22.1/date_fns.min.js"></script>
 
 
-    <style>
-      .ui-autocomplete {
+
+  <style>
+.ui-autocomplete {
         background-color: white;
         border: 1px solid #ccc;
         padding: 10px;
@@ -111,47 +139,57 @@
       .ui-menu-item:hover {
         background-color: #f0f0f0;
       }
-    </style>
+  </style>
 
-    <script>
-      $(document).ready(function () {
-        $("#quantidade").on("input", function () {
-          var quantidade = parseInt($(this).val());
-          var lanche = $("#lanche");
-
-          lanche.empty();
-
-          if (!isNaN(quantidade) && quantidade > 0) {
-            for (var i = 0; i < quantidade; i++) {
-              lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanches[' + i + ']"><option value="">Selecione o lanche</option><option value="Lanche 1">Café</option><option value="Lanche 2">Cachorro-Quente</option><option value="Lanche 3">Pão com Carne</option><option value="Lanche 4">Pão com Frango</option></select></div>');
-            }
-          }
-        });
-      });
-    </script>
+<style>
+  #valorTotal1 {
+      font-size: 20px;
+      color: rgb(0, 0, 0);
+      border: 2px solid rgb(255, 255, 255);
+      padding: 10px;
+      background-color: #ffffff;
+      border-radius: 5px;
+  }
+</style>
 
 <script>
-  $(document).ready(function () {
-    $("#quantidade").on("input", atualizarValorTotal);
-    
-    $("#lanche").on("change", "select", atualizarValorTotal);
-    
-    function atualizarValorTotal() {
-      var quantidade = parseInt($("#quantidade").val()) || 0;
-      var total = 0;
-      
-      $("#lanche select").each(function () {
-        var preco = parseFloat($(this).find("option:selected").data("preco")) || 0;
-        total += preco;
-      });
-      
-      var valorTotal = total * quantidade;
-      $("#valorTotal").text(valorTotal.toFixed(2));
-    }
-  });
+ function formatarComoMoeda(valor) {
+    return 'R$ ' + valor.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, '$1.');
+}
+function atualizarValorTotal() {
+    var valorTotal1 = 0.0;
+    $("#lanche select").each(function() {
+        var preco = $(this).find('option:selected').data('price');
+        if(preco) {
+            valorTotal1 += parseFloat(preco);
+        }
+    });
+    $('#valorTotal1').val(formatarComoMoeda(valorTotal1));
+}
+$("#lanche").on("change", "select", atualizarValorTotal);
+
 </script>
 
+<script>
+$(document).ready(function () {
+    $("#quantidade").on("input", function () {
+        var quantidadeDesejada = parseInt($(this).val());
+        var lanche = $("#lanche");
+        var quantidadeExistente = lanche.find('select').length;
 
+        for (var i = quantidadeExistente; i < quantidadeDesejada; i++) {
+            lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50">Café</option><option value="Cachorro-Quente" data-price="3.00">Cachorro-Quente</option><option value="Pão com Carne" data-price="3.00">Pão com Carne</option><option value="Pão com Frango" data-price="3.00">Pão com Frango</option></select></div>');
+        }
+
+        while (quantidadeExistente > quantidadeDesejada) {
+            lanche.find('.form-group').last().remove();
+            quantidadeExistente--;
+        }
+        atualizarValorTotal();
+    });
+});
+
+</script>
 
     <script>
       $(function () {

@@ -3,6 +3,8 @@ package com.kylanches.paineldecontrole.services;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,5 +42,8 @@ public class VendasService {
 
     public void excluirPorId(Long id) {
         vendasRepository.deleteById(id);
+    }
+
+    public void salvar(@Valid Vendas vendas) {
     }
 }

@@ -1,11 +1,18 @@
 package com.kylanches.paineldecontrole.model;
 
 import java.time.LocalDate;
+import java.util.List;
+
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -33,15 +40,18 @@ public class Vendas {
     @Column(name = "data_venda", nullable = false)
     private LocalDate dataVenda;
 
-    @Column(name = "lanche", nullable = false)
-    private String lanche;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "forma_pagamento", nullable = false)
-    private Integer formaPagamento;
+    private FormaPagamentoEnum formaPagamento;
+
+    @ElementCollection
+    @CollectionTable(name = "venda_lanches", joinColumns = @JoinColumn(name = "venda_id"))
+    @Column(name = "lanche")
+    private List<String> lanche;
 
     @Column(name = "quantidade", nullable = false)
     private Integer quantidade;
 
-    @Column(name = "valor_total", nullable = false)
+    @Column(name = "valor_total", nullable = true)
     private Double valorTotal;
 }

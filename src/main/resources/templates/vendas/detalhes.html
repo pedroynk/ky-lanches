@@ -23,58 +23,30 @@
                                 <p class="text-muted" th:text="${vendas.numero}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-project-diagram mr-1"></i> Data da Venda</strong>
-                                <p class="text-muted" th:text="${vendas.dataVenda}"></p>
+                                <strong><i class="fas fa-calendar-alt mr-1"></i> Data da Venda</strong>
+                                <p class="text-muted" th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-calendar-alt mr-1"></i> Lanche</strong>
-                                <p class="text-muted" th:text="${vendas.lanche}"></p>
+                                <strong><i class="fas fa-utensils mr-1"></i> Lanche</strong>
+                                <p class="text-muted" th:text="${#strings.replace(vendas.lanche.toString(), '[', '').replace(']', '')}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-clock mr-1"></i> Forma de Pagamento</strong>
-                                <p class="text-muted" th:text="${vendas.formaPagamento}"></p>
+                                <strong><i class="fas fa-money-check-alt mr-1"></i> Forma de Pagamento</strong>
+                                <p class="text-muted" th:text="${vendas.formaPagamento.descricao}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-dollar-sign mr-1"></i> Quantidade</strong>
+                                <strong><i class="fas fa-shopping-cart mr-1"></i> Quantidade</strong>
                                 <p class="text-muted" th:text="${vendas.quantidade}"></p>
                                 <hr>
 
-                                <strong><i class="fas fa-briefcase mr-1"></i> Valor</strong>
-                                <p class="text-muted" th:text="${vendas.valor}"></p>
+                                <strong><i class="fas fa-dollar-sign mr-1"></i> Valor Total</strong>
+                                <p class="text-muted" th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></p>
                                 <hr>
 
                             </div>
                         </div>
 
-                        <div class="card card-primary">
-                            <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>ID</th>
-                                            <th>Venda</th>
-                                            <th>Data da Venda</th>
-                                            <th>Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                            <td>
-                                                <a th:href="@{'/vendass/download/' + ${documento.id}}"
-                                                    class="btn btn-primary btn-sm">
-                                                    <i class="fas fa-download"></i>
-                                                </a>
-                                                <a th:href="@{'/vendas/excluir-venda/' + ${vendas.id}} + '/' + ${vendas.id}"
-                                                    class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Você tem certeza?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                    
                     </div>
                 </div>
             </div>

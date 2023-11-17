@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html th:replace="~{layout :: layout (~{::title}, ~{::main}, _, ~{::scripts})}">
-
 <head>
     <title>Vendas</title>
 </head>
-
 <body>
     <main>
         <div class="row">
@@ -18,10 +16,8 @@
                         <table class="table table-hover text-nowrap">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Numero da Venda</th>
+                                    <th>Número da Venda</th>
                                     <th>Data da Venda</th>
-                                    <th>Lanche</th>
                                     <th>Forma de Pagamento</th>
                                     <th>Quantidade</th>
                                     <th>Valor Total</th>
@@ -29,13 +25,11 @@
                             </thead>
                             <tbody>
                                 <tr th:each="vendas : ${vendas}">
-                                    <td th:text="${vendas.id}"></td>
                                     <td th:text="${vendas.numero}"></td>
-                                    <td th:text="${vendas.lanche}"></td>
-                                    <td th:text="${vendas.formaPagamento}"></td>
-                                    <td th:text="${vendas.quantidade}"></td>
-                                    <td th:text="${vendas.valorTotal}"></td>
                                     <td th:text="${#temporals.format(vendas.dataVenda,'dd/MM/yyyy')}"></td>
+                                    <td th:text="${vendas.formaPagamento.descricao}"></td>
+                                    <td th:text="${vendas.quantidade}"></td>
+                                    <td th:text="${#numbers.formatCurrency(vendas.valorTotal)}"></td>
                                     <td>
                                         <div class="btn-group">
                                             <a type="button" class="btn btn-primary"
@@ -82,17 +76,18 @@
                                     </li>
                                 </ul>
                             </nav>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </main>
-
     <th:block th:fragment="scripts">
         <script>
             $(function () {
                 $('[data-toggle="popover"]').popover()
             })
-
+        </script>
+    </th:block>
+</body>
+</html>
