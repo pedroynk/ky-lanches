@@ -36,7 +36,7 @@ public class VendasController {
     @Autowired
     private VendasService vendasService;
 
-
+        
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
@@ -53,6 +53,7 @@ public class VendasController {
 
         modelAndView.addObject("vendas", new Vendas());
         modelAndView.addObject("formasPagamento", FormaPagamentoEnum.values());
+        modelAndView.addObject("lanche", LancheEnum.values());
         return modelAndView;
     }
 
@@ -69,7 +70,7 @@ public class VendasController {
                     valorTotal += 3;
                 }
             }
-        if (bindingResult.hasErrors()) {
+                    if (bindingResult.hasErrors()) {
             modelMap.addAttribute("vendas", vendas);
             return new ModelAndView("redirect:/vendas/formulario");
         } else {
@@ -85,8 +86,7 @@ public ModelAndView editar(@PathVariable Long id) {
     ModelAndView modelAndView = new ModelAndView("vendas/formulario");
     modelAndView.addObject("vendas", this.vendasService.buscarPorId(id));
     modelAndView.addObject("formasPagamento", FormaPagamentoEnum.values());
-    modelAndView.addObject("lanches", LancheEnum.values());
-
+    modelAndView.addObject("lanche", LancheEnum.values());
     return modelAndView;
 }
 

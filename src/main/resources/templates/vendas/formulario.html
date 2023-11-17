@@ -67,14 +67,6 @@
                     </div>
 
                     <div id="lanche">
-                      <th:block th:each="lanche, iterStat : ${vendas.lanche}">
-                        <div class="form-group" id="lanche-div-${iterStat.index}">
-                          <label th:for="${'lanche' + iterStat.index}">Lanche</label>
-                          <select th:field="*{lanche}" class="form-control">
-                            <option th:each="lanche : ${lanche}" th:value="${lanche}" th:text="${lanche}" th:selected="${lanche}"></option>
-                          </select>
-                        </div>
-                      </th:block>
                     </div>
                   </div>
 
@@ -179,17 +171,24 @@ $("#lanche").on("change", "select", atualizarValorTotal);
 </script>
 
 <script>
-  $(document).ready(function () {
+$(document).ready(function () {
     $("#quantidade").on("input", function () {
-      var quantidadeDesejada = parseInt($(this).val());
-      var lanche = $("#lanche");
-      var quantidadeExistente = lanche.find('select').length;
+        var quantidadeDesejada = parseInt($(this).val());
+        var lanche = $("#lanche");
+        var quantidadeExistente = lanche.find('select').length;
 
-      for (var i = quantidadeExistente; i < quantidadeDesejada; i++) {
-        lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50">Café</option><option value="Cachorro-Quente" data-price="3.00">Cachorro-Quente</option><option value="Pão com Carne" data-price="3.00">Pão com Carne</option><option value="Pão com Frango" data-price="3.00">Pão com Frango</option></select></div>');
-      }
+        for (var i = quantidadeExistente; i < quantidadeDesejada; i++) {
+            lanche.append('<div class="form-group"><label for="lanche' + i + '">Lanche ' + (i + 1) + '</label><select class="form-control" id="lanche' + i + '" name="lanche[' + i + ']"><option value="">Selecione o lanche</option><option value="Café" data-price="1.50">Café</option><option value="Cachorro-Quente" data-price="3.00">Cachorro-Quente</option><option value="Pão com Carne" data-price="3.00">Pão com Carne</option><option value="Pão com Frango" data-price="3.00">Pão com Frango</option></select></div>');
+        }
+
+        while (quantidadeExistente > quantidadeDesejada) {
+            lanche.find('.form-group').last().remove();
+            quantidadeExistente--;
+        }
+        atualizarValorTotal();
     });
-  });
+});
+
 </script>
 
     <script>
